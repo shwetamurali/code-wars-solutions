@@ -1,0 +1,22 @@
+import java.math.BigInteger;
+
+class QuickCalc {
+	
+	public static BigInteger choose(int n, int p) {
+		if(n<p)
+      return BigInteger.ZERO;
+    BigInteger num = BigInteger.valueOf(n);
+    BigInteger k = BigInteger.valueOf(p);
+    BigInteger first = fact(num);
+    BigInteger last = fact(k).multiply(fact(num.subtract(k)));
+    System.out.println(n + " " + p + " " + first.divide(last));
+    return first.divide(last);
+  }
+  public static BigInteger fact(BigInteger num){
+    if(num.equals(BigInteger.ZERO) || num.equals(BigInteger.ONE))
+      return BigInteger.ONE;
+    BigInteger next = num.subtract(BigInteger.ONE);
+    BigInteger ret = num.multiply(fact(next));
+    return ret;
+  }
+}
