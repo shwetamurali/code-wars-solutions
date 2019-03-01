@@ -1,0 +1,14 @@
+public class Scramblies {
+    
+    public static boolean scramble(String str1, String str2) {
+      if(str2.length() > str1.length())
+        return false;
+      String[]arr = str2.split("");
+      for(String str:arr) {
+        if(!str1.contains(str))
+          return false;
+        str1 = str1.replaceFirst(str,"");
+      }
+      return true;
+    }
+}
