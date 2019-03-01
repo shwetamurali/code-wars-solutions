@@ -1,0 +1,44 @@
+import java.util.*;
+
+public class PeacefulYard {
+    public static boolean peacefulYard(String[] yard, int minDistance) {
+  List<Cat> cats = new ArrayList<>();
+        for (int i = 0; i < yard.length; i++) {
+            if (yard[i].contains("L")) {
+                cats.add(new Cat(yard[i].indexOf('L'), i));
+            }
+            if (yard[i].contains("M")) {
+                cats.add(new Cat(yard[i].indexOf('M'), i));
+            }
+            if (yard[i].contains("R")) {
+                cats.add(new Cat(yard[i].indexOf('R'), i));
+            }
+        }
+
+        if (cats.size() < 2) {
+            return true;
+        }
+
+        if (cats.size() < 3) {
+            return calcDist(cats.get(0), cats.get(1)) >= minDistance;
+        }
+         return calcDist(cats.get(0), cats.get(1)) >= minDistance &&
+                 calcDist(cats.get(1), cats.get(2)) >= minDistance &&
+                 calcDist(cats.get(2), cats.get(0)) >= minDistance;
+    }
+
+    static int calcDist(Cat first, Cat sec) {
+        return (int) Math.abs(Math.sqrt(Math.pow((sec.y - first.y), 2) + Math.pow((sec.x - first.x), 2)));
+    }
+
+}
+
+ class Cat {
+    int x;
+    int y;
+
+    public Cat(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+}
