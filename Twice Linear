@@ -1,0 +1,15 @@
+import java.util.*;
+class DoubleLinear {
+    
+    public static int dblLinear (int n) {
+        TreeSet<Integer> set = new TreeSet<Integer>();
+        set.add(1);
+        for(int i=0;i<n;i++) {
+          int x = set.first();
+          set.add(2*x+1);
+          set.add(3*x+1);
+          set.remove(set.first());
+        }
+        return set.first();
+    }
+}
