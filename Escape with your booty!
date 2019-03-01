@@ -1,0 +1,117 @@
+import java.util.List;
+import java.util.ArrayList;
+
+public class Course {
+      
+static void move(char[][] arr,Ship ship) {
+        
+        arr[ship.row][ship.col] = '0';
+        
+        if(ship.row == 0){
+            ship.dir = "down";
+            ship.row++;
+            arr[ship.row][ship.col] = 'N';
+            return;
+        }
+        
+        if(ship.row == arr.length - 1){
+            ship.dir = "up";
+            ship.row--;
+            arr[ship.row][ship.col] = 'N';
+            return;
+        }
+        
+        switch(ship.dir){
+            case "up":
+                ship.row--;
+                break;
+            case "down":
+                ship.row++;
+                break;
+        }
+        
+        arr[ship.row][ship.col] = 'N';
+    }
+    
+    static boolean win(char[][] arr,int col) {
+        return col == arr[0].length - 1;
+    }
+
+    public static boolean checkCourse(char[][] arr) {
+        
+        Ship ship = null;
+        List<Ship> list = new ArrayList<Ship>();
+        
+        for(int i=0;i<arr.length;i++){
+            char[] row = arr[i];
+            for(int j=0;j<row.length;j++){
+                char c = row[j];
+                if(c == 'N'){
+                    list.add(new Ship(i,j));
+                }
+                else if(c == 'X'){
+                    ship = new Ship(i,j);
+                }
+            }
+        }
+        
+        while(!win(arr,ship.col)){
+            letsGo(arr,ship);
+            for(Ship shipp : list){
+                move(arr,shipp);
+            }
+            if(!caughtOrNaw(arr,ship.row,ship.col)){
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
+    static boolean caughtOrNaw(char[][] arr,int row,int col) {
+    
+        int[][] nextTo = new int[8][2];       
+        nextTo[0] = new int[]{row-1,col};
+        nextTo[1] = new int[]{row-1,col+1};
+        nextTo[2] = new int[]{row,col+1};
+        nextTo[3] = new int[]{row+1,col+1};
+        nextTo[4] = new int[]{row+1,col};
+        nextTo[5] = new int[]{row+1,col-1};
+        nextTo[6] = new int[]{row,col-1};
+        nextTo[7] = new int[]{row-1,col-1};
+        
+        for(int[] unique: nextTo){
+            int currentRow = unique[0];
+            int currentCol = unique[1];
+            if(currentRow >= 0 && currentRow < arr.length){
+                if(currentCol >= 0 && currentCol < arr[0].length){
+                    if(arr[currentRow][currentCol] == 'N'){
+                        return false;
+                    }
+                }
+            }
+        }
+        
+        return true;
+    }
+    
+    static void letsGo(char[][] arr,Ship ship) {
+        arr[ship.row][ship.col] = '0';
+        ship.col++;
+        arr[ship.row][ship.col] = 'X';
+    }
+  
+
+
+    static class Ship{
+        
+        private String dir;
+        private int row;
+        private int col;
+        
+        public Ship(int row,int col){
+            this.row = row;
+            this.col = col;
+        }
+    }
+}
