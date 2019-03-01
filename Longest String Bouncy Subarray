@@ -1,0 +1,45 @@
+import java.util.*;
+
+class Bouncy {
+    
+    static List<Integer> longestBouncyList(List<Integer> arr) {
+      
+      ArrayList<List<Integer>> is = new ArrayList<List<Integer>>();
+      ArrayList<Integer> temp = new ArrayList<Integer>();
+
+      for(int i = 0; i < arr.size()-1; i++) {
+         temp = new ArrayList<Integer>();
+         boolean isUp = true;
+         if(arr.get(i)>arr.get(i+1))
+             isUp = false;
+         int al = i;
+         boolean isBouncy = true;
+         while(isBouncy) {
+           if(isUp && al < arr.size()-1 && arr.get(al) < arr.get(al+1)){
+             temp.add(arr.get(al));
+             isUp = false;
+           } 
+           else if(!isUp && al < arr.size()-1 && arr.get(al) > arr.get(al+1)) {
+              temp.add(arr.get(al));
+              isUp = true;
+           } 
+           else {
+             temp.add(arr.get(al));
+             is.add(temp);
+             isBouncy=false;
+           }
+           al++;
+         }
+        }
+      is.add(temp);
+      List<Integer> ret = new ArrayList<Integer>();
+        int size = 0;
+        for (List<Integer> unique: is){
+          if (unique.size() > size){
+            ret = unique;
+            size = unique.size();
+          }
+        }
+      return ret;
+    }
+}
