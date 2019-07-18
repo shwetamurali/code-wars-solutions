@@ -1,0 +1,27 @@
+import java.util.*;
+public class ObservedPin {
+   static TreeMap<String,String> map = new TreeMap<String,String>();
+ public static List<String> getPINs(String observed) {
+      List<String> possible = Arrays.asList("");
+      map.put("0","08");
+      map.put("1","124");
+      map.put("2","2135");
+      map.put("3","326");
+      map.put("4","4157");
+      map.put("5","52468");
+      map.put("6","6359");
+      map.put("7","748");
+      map.put("8","85790");
+      map.put("9","968");
+       for(int i=0;i<observed.length();i++){
+           ArrayList<String> list = new ArrayList<String>();
+           for(Character charr:map.get(observed.charAt(i)+"").toCharArray()){
+             for(String st:possible) 
+               list.add(st+charr);
+           }
+           possible=list;
+       }
+       return possible;
+    } 
+
+} 
