@@ -1,0 +1,19 @@
+import java.math.BigInteger;
+public class SumFct {
+  public static BigInteger perimeter(BigInteger n) {
+    
+    BigInteger zero = BigInteger.ZERO;
+    BigInteger one2 = BigInteger.ONE;
+    BigInteger one3 = BigInteger.ONE;
+    BigInteger sum = BigInteger.ZERO;
+    int nn= n.intValue();
+     
+    for(int i = 0; i <= nn; i++) {
+      zero = one2;
+      one2 = one3;
+      one3 = zero.add(one2);
+      sum = sum.add(zero);      
+    }
+    return sum.multiply(BigInteger.valueOf(4));
+  }
+}
