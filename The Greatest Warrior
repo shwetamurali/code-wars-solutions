@@ -1,0 +1,116 @@
+import java.util.Arrays;
+import java.util.ArrayList;
+
+class Warrior {
+
+    private int level;
+    private String rank;
+    private int experience;
+    private ArrayList<String> achievements = new ArrayList<>();
+    private String[] ranks = {"Pushover", "Novice", "Fighter", "Warrior",
+            "Veteran", "Sage", "Elite", "Conqueror", "Champion", "Master", "Greatest"};
+
+    public Warrior() {
+        level = 1;
+        updateRank();
+        experience = 100;
+    }
+
+    public void updateRank() {
+        if (level < 1) {
+            rank = ranks[0];
+        }
+        else if (level > 100) {
+            rank = ranks[10];
+        }
+        else {
+            rank = ranks[(int) level / 10];
+        }
+    }
+      public String getEnemyRank(int enemyLevel) {
+        if (enemyLevel < 1) {
+            return ranks[0];
+        }
+        else if (enemyLevel > 100) {
+            return ranks[10];
+        }
+        else {
+            return ranks[(int) enemyLevel / 10];
+        }
+    }
+
+    public void updateLevel() {
+        if (experience / 100 > 100) {
+            level = 100;
+            experience = 10000;
+        }
+        else {
+            level = (int) experience / 100;
+            updateRank();
+        }
+    }
+    public int experience() {
+        return experience;
+    }
+    public int level() {
+        return level;
+    }
+
+    public String rank() {
+        return rank;
+    }
+
+    public ArrayList<String> achievements() {
+        return achievements;
+    }
+
+    public String training(String description, int expPoints, int minLevel) {
+        updateLevel();
+        if (level >= minLevel) {
+            experience += expPoints;
+            achievements.add(description);
+            updateLevel();
+            return description;
+        }
+        else {
+            return "Not strong enough";
+        }
+    }
+
+    public String battle(int enemyLevel) {
+        updateLevel();
+        int diff = enemyLevel - level;
+        if (enemyLevel > 100 || enemyLevel < 1) {
+            return "Invalid level";
+        }
+        else if (enemyLevel == level) {
+            experience += 10;
+            updateLevel();
+            return "A good fight";
+        }
+        else if (enemyLevel +1 == level) {
+            experience += 5;
+            updateLevel();
+            return "A good fight";
+        }
+        else if (enemyLevel+1 < level ) {
+            experience += 0;
+            updateLevel();
+            return "Easy fight";
+        }
+        else if (getEnemyRank(enemyLevel).equals(rank) && enemyLevel > level) {
+            experience += 20 * diff * diff;
+            updateLevel();
+            return "An intense fight";
+        }
+        else if (diff >= 5 && getEnemyRank(enemyLevel) != rank) {
+            return "You've been defeated";
+        }
+        else {
+            experience += 20 * diff * diff;
+            updateLevel();
+            return "An intense fight";
+        }
+
+    }
+}
