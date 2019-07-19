@@ -1,0 +1,18 @@
+import java.util.*;
+
+public class Kata {
+    public static int pointsNumber(int radius)
+    {
+       int points = 0;
+       for(int x = radius*(-1); x <= radius; x++)
+       {
+         for(int y = radius*(-1); y <= radius; y++)
+         {
+           if(Math.sqrt(((0-x) * (0-x))+( (0-y) * (0-y))) <= radius)
+             points++;
+         }
+       }
+       return points;
+    }
+
+}
