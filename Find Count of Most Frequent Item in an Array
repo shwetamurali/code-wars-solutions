@@ -1,0 +1,23 @@
+import java.util.*;
+import java.io.*;
+import java.lang.*;
+import java.math.*;
+public class Kata {
+  public static int mostFrequentItemCount(int[] collection) {
+  int max =0;
+TreeMap<Integer,Integer> map = new TreeMap<Integer,Integer>();
+        for (int current : collection) { 
+            int count = map.getOrDefault(current, 0); 
+            map.put(current, count + 1); //key is the number, value is the count
+        } 
+    System.out.println(map);
+    Iterator it=map.keySet().iterator();
+    while(it.hasNext()) {
+      Integer inte=(Integer)it.next(); //key
+      Integer temp=map.get(inte);  //count associated with key
+      if(temp>max)
+        max= temp;
+    }
+      return max;
+  }
+}
