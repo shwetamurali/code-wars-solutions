@@ -1,0 +1,12 @@
+import java.math.BigInteger;
+
+public class Finance {
+	
+	public static BigInteger  finance(int n) {
+		long x = 0;
+    for(int i=1;i<=n+1;i++) {
+      x+=(long)(n*i);
+    }
+    return BigInteger.valueOf(x);
+	}
+}
