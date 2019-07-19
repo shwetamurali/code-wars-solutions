@@ -1,0 +1,20 @@
+import java.util.ArrayList;
+
+public class LoopInspector {
+
+  public int loopSize(Node node) {
+    ArrayList<Node> nodeList = new ArrayList<Node>();
+    Node current = node;
+    nodeList.add(current);
+    current = current.getNext();
+    while(!nodeList.contains(current))
+    {
+      nodeList.add(current);
+      current = current.getNext();
+    }
+    nodeList.add(current);
+    
+    return nodeList.lastIndexOf(current) - nodeList.indexOf(current);
+  }
+
+}
