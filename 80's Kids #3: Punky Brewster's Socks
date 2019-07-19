@@ -1,0 +1,35 @@
+import java.util.*;
+import java.io.*;
+import java.lang.*;
+import java.math.*;
+public class EightiesKids3 {
+
+  public static String[] getSocks(String name, String[] socks) {
+        String[]ret = new String[2];
+        TreeMap<String,Integer> map = new TreeMap<String,Integer>();
+        for (String current : socks) { 
+            int count = map.getOrDefault(current, 0); 
+            map.put(current, count + 1); 
+        } 
+      System.out.println(map);
+      if(name.equals("Punky")) {
+       if(map.size()>1) {
+       Iterator it=map.keySet().iterator();
+         ret[0]= (String)(it.next());
+         ret[1]=(String)(it.next());
+       }
+      }
+      else if(name.equals("Henry")) {
+        for (String key:map.keySet()) {
+        if(map.get(key)>=2) {
+          ret[0] = key;
+          ret[1]=key;
+        //  System.out.println(ret[0] + " " + ret[1]);
+        }
+        }
+      }
+     if(ret[0]==null)
+       return new String[0];
+      return ret;
+  }
+}
