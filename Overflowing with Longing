@@ -1,0 +1,10 @@
+public class Multiplier {
+  public static long multiply(long a, long b) {
+    try{
+     return Math.multiplyExact(a, b);
+    }
+    catch(ArithmeticException ar) {
+      throw new ArithmeticException();
+    }
+  }
+}
