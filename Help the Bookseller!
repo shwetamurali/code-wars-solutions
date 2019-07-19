@@ -1,0 +1,41 @@
+import java.util.*;
+import java.io.*;
+import java.lang.*;
+import java.math.*;
+public class StockList { 
+	
+  // 1st parameter is the stocklist (L in example), 
+	// 2nd parameter is list of categories (M in example)
+	public static String stockSummary(String[] lstOfArt, String[] lstOf1stLetter) {
+    if(lstOfArt.length==0 || lstOf1stLetter.length==0) 
+      return "";
+		TreeMap<String,Integer> map = new TreeMap<String,Integer>();
+    for (String current : lstOfArt) { 
+        String[]arr=current.split(" ");
+        String chara = Character.toString(current.charAt(0));
+				if(!map.containsKey(chara))
+				{
+					map.put(chara, Integer.parseInt(arr[1]));
+				}
+        else
+				  map.put(chara, ( map.get(chara) + Integer.parseInt(arr[1])) );
+    } 
+    for(String letter:lstOf1stLetter) {
+      if(!map.containsKey(letter))  
+        map.put(letter, 0);
+    }
+
+    String ret = "";
+    for(int j=0;j<lstOf1stLetter.length;j++) {
+      if(j==lstOf1stLetter.length-1) {
+      ret+="(";
+        ret+=lstOf1stLetter[j]+" : "+map.get(lstOf1stLetter[j]) +")";
+        }
+      else {
+      ret+="(";
+         ret+=lstOf1stLetter[j]+" : "+map.get(lstOf1stLetter[j]) +") - ";
+      }
+    }
+    return ret;
+	}
+}
