@@ -1,0 +1,22 @@
+import java.util.*;
+import java.io.*;
+import java.lang.*;
+import java.math.*;
+public class FindOdd {
+	public static int findIt(int[] a) {
+  	TreeMap<Integer,Integer> map = new TreeMap<Integer,Integer>();
+        for (int current : a) { 
+            int count = map.getOrDefault(current, 0); 
+            map.put(current, count + 1); 
+        } 
+    System.out.println(map);
+    Iterator it=map.keySet().iterator();
+		while(it.hasNext()) {
+      Integer inte=(Integer)it.next();
+      Integer temp=map.get(inte);
+      if(temp%2==1)
+        return inte;
+    }
+      return 0;
+  }
+}
